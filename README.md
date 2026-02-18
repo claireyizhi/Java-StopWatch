@@ -4,7 +4,7 @@ Simple Swing stopwatch app for the assignment requirements.
 
 ## Package
 
-`ca.lastname.stopwatch`
+`ca.zhang.stopwatch`
 
 ## Features
 
@@ -23,11 +23,11 @@ Simple Swing stopwatch app for the assignment requirements.
 Compile:
 
 ```bash
-javac -d out src/main/java/ca/lastname/stopwatch/StopwatchApp.java
+javac -d out src/main/java/ca/zhang/stopwatch/StopwatchApp.java
 ```
 
 Run:
 
 ```bash
-java -cp out ca.lastname.stopwatch.StopwatchApp
+java -cp out ca.zhang.stopwatch.StopwatchApp
 ```
