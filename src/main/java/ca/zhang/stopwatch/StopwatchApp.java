@@ -37,7 +37,8 @@ public final class StopwatchApp extends JFrame {
     private final JTextField lapTenthsField;
     private final JTextArea lapsArea;
     private final JButton startStopButton;
-    private final JButton lapResetButton;
+    private final JButton lapButton;
+    private final JButton resetButton;
 
     public StopwatchApp() {
         super("Stopwatch");
@@ -49,7 +50,8 @@ public final class StopwatchApp extends JFrame {
         lapTenthsField = createNumberField();
         lapsArea = new JTextArea(7, 24);
         startStopButton = new JButton("Start");
-        lapResetButton = new JButton("Reset");
+        lapButton = new JButton("Lap");
+        resetButton = new JButton("Reset");
 
         timer = new Timer(100, event -> onTick());
         buildUi();
@@ -109,8 +111,11 @@ public final class StopwatchApp extends JFrame {
         center.add(startStopButton, gbc);
 
         gbc.gridx = 2;
-        gbc.gridwidth = 2;
-        center.add(lapResetButton, gbc);
+        gbc.gridwidth = 1;
+        center.add(lapButton, gbc);
+
+        gbc.gridx = 3;
+        center.add(resetButton, gbc);
 
         root.add(center, BorderLayout.CENTER);
 
@@ -127,13 +132,12 @@ public final class StopwatchApp extends JFrame {
 
     private void bindEvents() {
         startStopButton.addActionListener(event -> toggleRunning());
-        lapResetButton.addActionListener(event -> {
+        lapButton.addActionListener(event -> {
             if (running) {
                 recordLap();
-            } else {
-                resetState();
             }
         });
+        resetButton.addActionListener(event -> resetState());
     }
 
     private JTextField createNumberField() {
@@ -149,12 +153,12 @@ public final class StopwatchApp extends JFrame {
             timer.stop();
             running = false;
             startStopButton.setText("Start");
-            lapResetButton.setText("Reset");
+            lapButton.setEnabled(false);
         } else {
             timer.start();
             running = true;
             startStopButton.setText("Stop");
-            lapResetButton.setText("Lap");
+            lapButton.setEnabled(true);
         }
     }
 
@@ -195,7 +199,7 @@ public final class StopwatchApp extends JFrame {
 
         lapsArea.setText("");
         startStopButton.setText("Start");
-        lapResetButton.setText("Reset");
+        lapButton.setEnabled(false);
         refreshDisplayFields();
     }
 
